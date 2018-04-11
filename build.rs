@@ -3,6 +3,10 @@ use std::env;
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
 
+    if *env::var_os("CHECK").unwrap_or_default() == *"1" {
+        return;
+    }
+
     let target = env::var("TARGET").unwrap();
 
     // Emscripten's runtime includes all the builtins
